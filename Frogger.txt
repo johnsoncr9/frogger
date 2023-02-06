@@ -1,0 +1,564 @@
+Frogger
+
+Game Rules
+- Control frogger from bottom of the screen to the top of the screen. Need to pass 2 lan highway (both right and left) and then cross the river on logs
+ - control froger with arrow keys button action (keydown)
+ - use xAxis and yAxis, along with absolute position for movement and location
+ - create classes for cars and logs and water divs
+ 
+ Main Questions
+- How do i get the cars and the logs to move?
+  - Set inteval in some aspect
+  - Will need to create each element individually :0
+
+
+- How do I make the water cause sendFroggerHome? X
+  - getting the location would be a pain. 
+  - I can do based on the y-axis... if frogger is in the y-axis and not in the
+    same location as a log; return home. 
+
+- Bugs
+  -Lawnmowerhitch: skips location (0,200)
+  - if frogger not moving on right side of lawnmower, 
+    won't register a hit
+  - || instead of &&?  
+
+- Attempt 2
+  - Change the cars and logs from classes to individual pieces
+    so I can get them to move. 
+
+
+
+// Logs
+const logWidth = 75;
+const logHeight = 25;
+
+// Logs
+//car one
+const logOneStartingPosition = [100, 275];
+let logOneXPosition = 100;
+let logOneYPosition = 275;
+let logOneCurrentPosition = logOneStartingPosition;
+const logOne = document.createElement("div");
+const logOneWidth = 75;
+const logOneHeight = 25;
+let onLog;
+
+// Draw logOne
+const drawlogOne = () => {
+  logOne.style.left = logOneCurrentPosition[0] + "px";
+  logOne.style.bottom = logOneCurrentPosition[1] + "px";
+};
+
+const createlogOne = () => {
+  logOne.classList.add("logs");
+  drawlogOne();
+  map.appendChild(logOne);
+};
+
+createlogOne();
+
+// Move logOne
+const movelogOneRight = () => {
+  logOneCurrentPosition[0] += logOneXPosition;
+  drawlogOne();
+};
+const movelogOneLeft = () => {
+  logOneCurrentPosition[0] -= logOneXPosition;
+  drawlogOne();
+};
+
+createlogOne();
+
+const movelogOne = () => {
+  let logOneDirection;
+  if (logOneCurrentPosition[0] < boardWidth) {
+    logOneDirection = "right";
+    movelogOneRight();
+    checkForlogOneColision();
+  }
+  if (logOneCurrentPosition[0] === boardWidth) {
+    logOneDirection = "right";
+    logOneCurrentPosition = [-100, 275];
+    drawlogOne();
+  }
+};
+
+//logOne Collision detection
+
+const checkForlogOneColision = () => {
+  if (
+    currentPosition[0] >= logOneCurrentPosition[0] &&
+    currentPosition[0] < logOneCurrentPosition[0] + logOneWidth &&
+    currentPosition[1] + froggerHeight >=
+      logOneCurrentPosition[1] + logOneHeight &&
+    currentPosition[1] < logOneCurrentPosition[1] + logOneHeight
+  ) {
+    onLog = true;
+    froggerStatus.innerHTML = "Frogger is on log One!";
+    
+  }
+};
+//log two
+const logTwoStartingPosition = [250, 50];
+let logTwoXPosition = 25;
+let logTwoYPosition = 25;
+let logTwoCurrentPosition = logTwoStartingPosition;
+const logTwo = document.createElement("div");
+const logTwoWidth = 50;
+const logTwoHeight = 25;
+
+// Draw logTwo
+const drawlogTwo = () => {
+  logTwo.style.left = logTwoCurrentPosition[0] + "px";
+  logTwo.style.bottom = logTwoCurrentPosition[1] + "px";
+};
+
+const createlogTwo = () => {
+  logTwo.classList.add("logs");
+  drawlogTwo();
+  map.appendChild(logTwo);
+};
+
+createlogTwo();
+
+// Move logTwo
+const movelogTwoRight = () => {
+  logTwoCurrentPosition[0] += logTwoXPosition;
+  drawlogTwo();
+};
+const movelogTwoLeft = () => {
+  logTwoCurrentPosition[0] -= logTwoXPosition;
+  drawlogTwo();
+};
+
+createlogTwo();
+
+const movelogTwo = () => {
+  let logTwoDirection;
+  if (logTwoCurrentPosition[0] < boardWidth) {
+    logTwoDirection = "right";
+    movelogTwoRight();
+    checkForlogTwoColision();
+  }
+  if (logTwoCurrentPosition[0] === boardWidth) {
+    logTwoDirection = "right";
+    logTwoCurrentPosition = [-25, 50];
+    drawlogTwo();
+  }
+};
+
+//logTwo Collision detection
+
+const checkForlogTwoColision = () => {
+  if (
+    currentPosition[0] >= logTwoCurrentPosition[0] &&
+    currentPosition[0] < logTwoCurrentPosition[0] + logTwoWidth &&
+    currentPosition[1] + froggerHeight >=
+      logTwoCurrentPosition[1] + logTwoHeight &&
+    currentPosition[1] < logTwoCurrentPosition[1] + logTwoHeight
+  ) {
+    froggerStatus.innerHTML = "Frogger was hit by log Two!";
+    sendFroggerHome();
+  }
+};
+//log three
+const logThreeStartingPosition = [125, 75];
+let logThreeXPosition = 25;
+let logThreeYPosition = 25;
+let logThreeCurrentPosition = logThreeStartingPosition;
+const logThree = document.createElement("div");
+const logThreeWidth = 50;
+const logThreeHeight = 25;
+
+// Draw logThree
+const drawlogThree = () => {
+  logThree.style.left = logThreeCurrentPosition[0] + "px";
+  logThree.style.bottom = logThreeCurrentPosition[1] + "px";
+};
+
+const createlogThree = () => {
+  logThree.classList.add("logs");
+  drawlogThree();
+  map.appendChild(logThree);
+};
+
+createlogThree();
+
+// Move logThree
+const movelogThreeRight = () => {
+  logThreeCurrentPosition[0] += logThreeXPosition;
+  drawlogThree();
+};
+const movelogThreeLeft = () => {
+  logThreeCurrentPosition[0] -= logThreeXPosition;
+  drawlogThree();
+};
+
+createlogThree();
+
+const movelogThree = () => {
+  let logThreeDirection;
+  if (logThreeCurrentPosition[0] < boardWidth) {
+    logThreeDirection = "right";
+    movelogThreeRight();
+    checkForlogThreeColision();
+  }
+  if (logThreeCurrentPosition[0] === boardWidth) {
+    logThreeDirection = "right";
+    logThreeCurrentPosition = [0, 75];
+    drawlogThree();
+  }
+};
+
+//logThree Collision detection
+
+const checkForlogThreeColision = () => {
+  if (
+    currentPosition[0] >= logThreeCurrentPosition[0] &&
+    currentPosition[0] < logThreeCurrentPosition[0] + logThreeWidth &&
+    currentPosition[1] + froggerHeight >=
+      logThreeCurrentPosition[1] + logThreeHeight &&
+    currentPosition[1] < logThreeCurrentPosition[1] + logThreeHeight
+  ) {
+    froggerStatus.innerHTML = "Frogger was hit by log Three!";
+    sendFroggerHome();
+  }
+};
+//log Four
+const logFourStartingPosition = [275, 75];
+let logFourXPosition = 25;
+let logFourYPosition = 25;
+let logFourCurrentPosition = logFourStartingPosition;
+const logFour = document.createElement("div");
+const logFourWidth = 50;
+const logFourHeight = 25;
+
+// Draw logFour
+const drawlogFour = () => {
+  logFour.style.left = logFourCurrentPosition[0] + "px";
+  logFour.style.bottom = logFourCurrentPosition[1] + "px";
+};
+
+const createlogFour = () => {
+  logFour.classList.add("logs");
+  drawlogFour();
+  map.appendChild(logFour);
+};
+
+createlogFour();
+
+// Move logFour
+const movelogFourRight = () => {
+  logFourCurrentPosition[0] += logFourXPosition;
+  drawlogFour();
+};
+const movelogFourLeft = () => {
+  logFourCurrentPosition[0] -= logFourXPosition;
+  drawlogFour();
+};
+
+createlogFour();
+
+const movelogFour = () => {
+  let logFourDirection;
+  if (logFourCurrentPosition[0] < boardWidth) {
+    logFourDirection = "right";
+    movelogFourRight();
+    checkForlogFourColision();
+  }
+  if (logFourCurrentPosition[0] === boardWidth) {
+    logFourDirection = "right";
+    logFourCurrentPosition = [-50, 75];
+    drawlogFour();
+  }
+};
+
+//logFour Collision detection
+
+const checkForlogFourColision = () => {
+  if (
+    currentPosition[0] >= logFourCurrentPosition[0] &&
+    currentPosition[0] < logFourCurrentPosition[0] + logFourWidth &&
+    currentPosition[1] + froggerHeight >=
+      logFourCurrentPosition[1] + logFourHeight &&
+    currentPosition[1] < logFourCurrentPosition[1] + logFourHeight
+  ) {
+    froggerStatus.innerHTML = "Frogger was hit by log Four!";
+    sendFroggerHome();
+  }
+};
+//log Five
+const logFiveStartingPosition = [150, 125];
+let logFiveXPosition = 25;
+let logFiveYPosition = 25;
+let logFiveCurrentPosition = logFiveStartingPosition;
+const logFive = document.createElement("div");
+const logFiveWidth = 50;
+const logFiveHeight = 25;
+
+// Draw logFive
+const drawlogFive = () => {
+  logFive.style.left = logFiveCurrentPosition[0] + "px";
+  logFive.style.bottom = logFiveCurrentPosition[1] + "px";
+};
+
+const createlogFive = () => {
+  logFive.classList.add("logs");
+  drawlogFive();
+  map.appendChild(logFive);
+};
+
+createlogFive();
+
+// Move logFive
+const movelogFiveRight = () => {
+  logFiveCurrentPosition[0] += logFiveXPosition;
+  drawlogFive();
+};
+const movelogFiveLeft = () => {
+  logFiveCurrentPosition[0] -= logFiveXPosition;
+  drawlogFive();
+};
+
+createlogFive();
+
+const movelogFive = () => {
+  let logFiveDirection;
+  if (logFiveCurrentPosition[0] >= 0 - logFiveWidth) {
+    logFiveDirection = "left";
+    movelogFiveLeft();
+    checkForlogFiveColision();
+  }
+  if (logFiveCurrentPosition[0] === -50) {
+    logFiveDirection = "left";
+    logFiveCurrentPosition = [450, 125];
+    drawlogFive();
+  }
+};
+
+//logFive Collision detection
+
+const checkForlogFiveColision = () => {
+  if (
+    currentPosition[0] >= logFiveCurrentPosition[0] &&
+    currentPosition[0] < logFiveCurrentPosition[0] + logFiveWidth &&
+    currentPosition[1] + froggerHeight >=
+      logFiveCurrentPosition[1] + logFiveHeight &&
+    currentPosition[1] < logFiveCurrentPosition[1] + logFiveHeight
+  ) {
+    froggerStatus.innerHTML = "Frogger was hit by log Five!";
+    sendFroggerHome();
+  }
+};
+//log Six
+const logSixStartingPosition = [250, 125];
+let logSixXPosition = 25;
+let logSixYPosition = 25;
+let logSixCurrentPosition = logSixStartingPosition;
+const logSix = document.createElement("div");
+const logSixWidth = 50;
+const logSixHeight = 25;
+
+// Draw logSix
+const drawlogSix = () => {
+  logSix.style.left = logSixCurrentPosition[0] + "px";
+  logSix.style.bottom = logSixCurrentPosition[1] + "px";
+};
+
+const createlogSix = () => {
+  logSix.classList.add("logs");
+  drawlogSix();
+  map.appendChild(logSix);
+};
+
+createlogSix();
+
+// Move logSix
+const movelogSixRight = () => {
+  logSixCurrentPosition[0] += logSixXPosition;
+  drawlogSix();
+};
+const movelogSixLeft = () => {
+  logSixCurrentPosition[0] -= logSixXPosition;
+  drawlogSix();
+};
+
+createlogSix();
+
+const movelogSix = () => {
+  let logSixDirection;
+  if (logSixCurrentPosition[0] > 0 - logSixWidth) {
+    logSixDirection = "left";
+    movelogSixLeft();
+    checkForlogSixColision();
+  }
+  if (logSixCurrentPosition[0] === -50) {
+    logSixDirection = "left";
+    logSixCurrentPosition = [450, 125];
+    drawlogSix();
+  }
+};
+
+//logSix Collision detection
+
+const checkForlogSixColision = () => {
+  if (
+    currentPosition[0] >= logSixCurrentPosition[0] &&
+    currentPosition[0] < logSixCurrentPosition[0] + logSixWidth &&
+    currentPosition[1] + froggerHeight >=
+      logSixCurrentPosition[1] + logSixHeight &&
+    currentPosition[1] < logSixCurrentPosition[1] + logSixHeight
+  ) {
+    froggerStatus.innerHTML = "Frogger was hit by log Six!";
+    sendFroggerHome();
+  }
+};
+//log Seven
+const logSevenStartingPosition = [50, 150];
+let logSevenXPosition = 25;
+let logSevenYPosition = 25;
+let logSevenCurrentPosition = logSevenStartingPosition;
+const logSeven = document.createElement("div");
+const logSevenWidth = 50;
+const logSevenHeight = 25;
+
+// Draw logSeven
+const drawlogSeven = () => {
+  logSeven.style.left = logSevenCurrentPosition[0] + "px";
+  logSeven.style.bottom = logSevenCurrentPosition[1] + "px";
+};
+
+const createlogSeven = () => {
+  logSeven.classList.add("logs");
+  drawlogSeven();
+  map.appendChild(logSeven);
+};
+
+createlogSeven();
+
+// Move logSeven
+const movelogSevenRight = () => {
+  logSevenCurrentPosition[0] += logSevenXPosition;
+  drawlogSeven();
+};
+const movelogSevenLeft = () => {
+  logSevenCurrentPosition[0] -= logSevenXPosition;
+  drawlogSeven();
+};
+
+createlogSeven();
+
+const movelogSeven = () => {
+  let logSevenDirection;
+  if (logSevenCurrentPosition[0] > 0 - logSevenWidth) {
+    logSevenDirection = "Left";
+    movelogSevenLeft();
+    checkForlogSevenColision();
+  }
+  if (logSevenCurrentPosition[0] === -50) {
+    logSevenDirection = "Left";
+    logSevenCurrentPosition = [450, 150];
+    drawlogSeven();
+  }
+};
+
+//logSeven Collision detection
+
+const checkForlogSevenColision = () => {
+  if (
+    currentPosition[0] >= logSevenCurrentPosition[0] &&
+    currentPosition[0] < logSevenCurrentPosition[0] + logSevenWidth &&
+    currentPosition[1] + froggerHeight >=
+      logSevenCurrentPosition[1] + logSevenHeight &&
+    currentPosition[1] < logSevenCurrentPosition[1] + logSevenHeight
+  ) {
+    froggerStatus.innerHTML = "Frogger was hit by log Seven!";
+    sendFroggerHome();
+  }
+};
+//log Eight
+const logEightStartingPosition = [175, 150];
+let logEightXPosition = 25;
+let logEightYPosition = 25;
+let logEightCurrentPosition = logEightStartingPosition;
+const logEight = document.createElement("div");
+const logEightWidth = 50;
+const logEightHeight = 25;
+
+// Draw logEight
+const drawlogEight = () => {
+  logEight.style.left = logEightCurrentPosition[0] + "px";
+  logEight.style.bottom = logEightCurrentPosition[1] + "px";
+};
+
+const createlogEight = () => {
+  logEight.classList.add("logs");
+  drawlogEight();
+  map.appendChild(logEight);
+};
+
+createlogEight();
+
+// Move logEight
+const movelogEightRight = () => {
+  logEightCurrentPosition[0] += logEightXPosition;
+  drawlogEight();
+};
+const movelogEightLeft = () => {
+  logEightCurrentPosition[0] -= logEightXPosition;
+  drawlogEight();
+};
+
+createlogEight();
+
+const movelogEight = () => {
+  let logEightDirection;
+  if (logEightCurrentPosition[0] >= 0 - logEightWidth) {
+    logEightDirection = "left";
+    movelogEightLeft();
+    checkForlogEightColision();
+  }
+  if (logEightCurrentPosition[0] === -50) {
+    logEightDirection = "left";
+    logEightCurrentPosition = [425, 150];
+    drawlogEight();
+  }
+};
+
+//logEight Collision detection
+
+const checkForlogEightColision = () => {
+  if (
+    currentPosition[0] >= logEightCurrentPosition[0] &&
+    currentPosition[0] < logEightCurrentPosition[0] + logEightWidth &&
+    currentPosition[1] + froggerHeight >=
+      logEightCurrentPosition[1] + logEightHeight &&
+    currentPosition[1] < logEightCurrentPosition[1] + logEightHeight
+  ) {
+    froggerStatus.innerHTML = "Frogger was hit by log Eight!";
+    sendFroggerHome();
+  }
+};
+
+const movelogs = () => {
+  movelogOne();
+  movelogTwo();
+  movelogThree();
+  movelogFour();
+  movelogFive();
+  movelogSix();
+  movelogSeven();
+  movelogEight();
+};
+
+const checkForAlllogsCollision = () => {
+  checkForlogOneColision();
+  checkForlogTwoColision();
+  checkForlogThreeColision();
+  checkForlogFourColision();
+  checkForlogFiveColision();
+  checkForlogSixColision();
+  checkForlogSevenColision();
+  checkForlogEightColision();
+};
